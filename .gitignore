@@ -1,2 +1,9 @@
 .idea/
 target/
+
+.nvimlog
+
+.bloop
+.metals
+metals.sbt
+
