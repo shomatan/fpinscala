@@ -3,6 +3,7 @@ target/
 
 .nvimlog
 
+.bsp
 .bloop
 .metals
 metals.sbt
