@@ -62,3 +62,11 @@ trait Monad[F[_]] extends Functor[F] {
     )
 
 }
+
+case class Reader[R, A](run: R => A)
+
+object Monnad {
+  val genMonad = new Monad[Gen] {
+    def unit[A](a: => A): Gen[A] = Gen.unit(a)
+  }
+}
