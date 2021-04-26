@@ -10,3 +10,5 @@ lazy val ch3 = (project in file("ch3"))
 lazy val root = (project in file("."))
   .dependsOn(ch2)
   .dependsOn(ch3)
+
+Global / onChangedBuildSource := ReloadOnSourceChanges
