@@ -10,6 +10,12 @@ object Main extends App {
       else Cons(as.head, apply(as.tail: _*))
   }
 
+  def append[A](a1: List[A], a2: List[A]): List[A] =
+    a1 match {
+      case Nil        => a2
+      case Cons(h, t) => Cons(h, append(t, a2))
+    }
+
   // EXERCISE 3.2
   def tail[A](list: List[A]): List[A] =
     list match {
@@ -86,4 +92,21 @@ object Main extends App {
   def reverse[A](list: List[A]): List[A] =
     foldLeft(list, List[A]()) { (acc, item) => Cons(item, acc) }
 
+  // EXERCISE 3.13
+  def foldRightViaFoldLeft[A, B](l: List[A], z: B)(f: (A, B) => B): B =
+    foldLeft(reverse(l), z)((b, a) => f(a, b))
+
+  def foldRightViaFoldLeft1[A, B](l: List[A], z: B)(f: (A, B) => B): B =
+    foldLeft(l, (b: B) => b)((g, a) => b => g(f(a, b)))(z)
+
+  def foldLeftViaFoldRight[A, B](l: List[A], z: B)(f: (B, A) => B): B =
+    foldRight(l, (b: B) => b)((a, g) => b => g(f(b, a)))(z)
+
+  // EXERCISE 3.14
+  def appendViaFoldRight[A](l: List[A], r: List[A]): List[A] =
+    foldRight(l, r)(Cons(_, _))
+
+  // EXERCISE 3.15
+  def concat[A](l: List[List[A]]): List[A] =
+    foldRight(l, Nil: List[A])(append)
 }
